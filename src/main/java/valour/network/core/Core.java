@@ -1,7 +1,6 @@
 package valour.network.core;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import valour.network.core.cmds.CommandManager;
 import valour.network.core.rankManager.ConsoleUpdateRankCommand;
 
 import java.sql.Connection;
@@ -12,11 +11,6 @@ import java.sql.Statement;
 public class Core extends JavaPlugin
 {
     private static Core instance;
-
-    public Core()
-    {
-        instance = this;
-    }
 
     public static Core getInstance()
     {
@@ -29,7 +23,7 @@ public class Core extends JavaPlugin
 
     public void onEnable()
     {
-        setup();
+        instance = this;
 
         saveDefaultConfig();
         reloadConfig();
@@ -87,10 +81,5 @@ public class Core extends JavaPlugin
             Class.forName("com.mysql.jdbc.Driver");
             _connection = DriverManager.getConnection("jdbc:mysql://" + this._host + ":" + this._port + "/" + this._database, this._username, this._password);
         }
-    }
-
-    private void setup()
-    {
-        new CommandManager().setup();
     }
 }

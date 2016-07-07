@@ -6,58 +6,35 @@ import java.util.HashMap;
 
 public enum Rank
 {
-    OWNER("Owner", ChatColor.RED),
-    ADMIN("Admin", ChatColor.RED),
-    VET_DEV("Vet.Dev", ChatColor.GOLD),
-    DEV("Dev", ChatColor.GOLD),
-    VET_MOD("Vet.Mod", ChatColor.DARK_PURPLE),
-    MOD("Mod", ChatColor.GREEN),
-    MENTEE("Mentee", ChatColor.DARK_AQUA),
-    BUILDER("Builder", ChatColor.BLUE),
+    OWNER("Owner", ChatColor.RED, 999),
+    ADMIN("Admin", ChatColor.RED, 100),
+    VET_DEV("Vet.Dev", ChatColor.GOLD, 100),
+    DEV("Dev", ChatColor.GOLD, 99),
+    VET_MOD("Vet.Mod", ChatColor.DARK_PURPLE, 90),
+    MOD("Mod", ChatColor.GREEN, 80),
+    MENTEE("Mentee", ChatColor.DARK_AQUA, 70),
+    BUILDER("Builder", ChatColor.BLUE, 60),
     // Staff ^^
 
-    YOUTUBE("Youtube", ChatColor.RED),
-    TWITCH("Twitch", ChatColor.DARK_PURPLE),
+    YOUTUBE("Youtube", ChatColor.RED, 50),
+    TWITCH("Twitch", ChatColor.DARK_PURPLE, 50),
     // Special ^^
 
-    VALIANT("Valiant", ChatColor.YELLOW),
-    GALLANT("Gallant", ChatColor.YELLOW),
-    BRAVE("Brave", ChatColor.YELLOW),
-    DEFAULT("", ChatColor.WHITE);
+    VALIANT("Valiant", ChatColor.YELLOW, 40),
+    GALLANT("Gallant", ChatColor.YELLOW, 30),
+    BRAVE("Brave", ChatColor.YELLOW, 20),
+    DEFAULT("", ChatColor.WHITE, 10);
     // Donators ^^
 
     private String name;
     private ChatColor _colour;
+    private int _priority;
 
-    private HashMap<Rank, Integer> _priority = new HashMap<Rank, Integer>();
-
-    Rank(String name, ChatColor colour)
+    Rank(String name, ChatColor colour, int priority)
     {
         _colour = colour;
         this.name = name;
-
-        setup();
-    }
-
-    private void setup()
-    {
-        _priority.put(Rank.OWNER, 999);
-        _priority.put(Rank.ADMIN, 100);
-        _priority.put(Rank.VET_DEV, 100);
-        _priority.put(Rank.DEV, 99);
-
-        _priority.put(Rank.VET_MOD, 90);
-        _priority.put(Rank.MOD, 80);
-        _priority.put(Rank.MENTEE, 70);
-        _priority.put(Rank.BUILDER, 60);
-
-        _priority.put(Rank.YOUTUBE, 50);
-        _priority.put(Rank.TWITCH, 50);
-
-        _priority.put(Rank.VALIANT, 40);
-        _priority.put(Rank.GALLANT, 30);
-        _priority.put(Rank.BRAVE, 20);
-        _priority.put(Rank.DEFAULT, 10);
+        _priority = priority;
     }
 
     public String getTag(boolean uppercase, boolean bold)
@@ -82,6 +59,6 @@ public enum Rank
 
     public int getPriority()
     {
-        return _priority.get(this);
+        return _priority;
     }
 }
