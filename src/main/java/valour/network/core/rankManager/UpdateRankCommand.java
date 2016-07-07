@@ -23,6 +23,7 @@ public class UpdateRankCommand extends CoreCommand
         }
         else
         {
+            String aPlayer = args[0];
             OfflinePlayer player = Bukkit.getOfflinePlayer(args[0]);
 
             if (player.hasPlayedBefore())

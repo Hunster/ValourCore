@@ -52,13 +52,14 @@ public class RankAssigner extends MiniPlugin
                 {
                     Statement statement = Core.getInstance().getConnection().createStatement();
                     statement.executeUpdate("DELETE FROM Ranks WHERE UUID = '" + playerID + "';");
-                    statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID + "', DEFAULT);");
+                    statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID + "', '" + rank + "');");
 
                     if (inform && Bukkit.getPlayer(playerID) != null)
                     {
                         Player p = Bukkit.getPlayer(playerID);
                         p.sendMessage(Chat.main(getName(), "Your rank has been updated to §9" + rank.getTag(true, false)));
                         p.sendMessage(Chat.main(getName(), "You may need to relog for changes to take effect!"));
+                        p.setPlayerListName(RankChecker.getRank(p).getTag(true, true) + " §e" + p.getName());
                     }
                 }
                 catch (SQLException ex)

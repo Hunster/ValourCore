@@ -1,39 +1,40 @@
 package valour.network.core;
 
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import valour.network.core.cmds.CommandManager;
-import valour.network.core.rankManager.RankChecker;
+import valour.network.core.rankManager.ConsoleUpdateRankCommand;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Core extends JavaPlugin
 {
-    private static Core core;
+    private static Core instance;
+
+    public Core()
+    {
+        instance = this;
+    }
+
+    public static Core getInstance()
+    {
+        return instance;
+    }
 
     private Connection _connection;
     private String _host, _database, _username, _password;
     private int _port;
 
-    public static Core getInstance()
-    {
-        if (core == null)
-        {
-            core = new Core();
-        }
-        return core;
-    }
-
-    public Plugin getPlugin()
-    {
-        return this;
-    }
-
     public void onEnable()
     {
         setup();
+
+        saveDefaultConfig();
+        reloadConfig();
+
+        getCommand("consoleupdaterank").setExecutor(new ConsoleUpdateRankCommand());
 
         _host = getConfig().getString("sql_host");
         _port = getConfig().getInt("sql_port");
@@ -44,6 +45,8 @@ public class Core extends JavaPlugin
         try
         {
             openConnection();
+            Statement statement = _connection.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Ranks(UUID varchar(36), rank varchar(7));");
         }
         catch (ClassNotFoundException e)
         {
@@ -88,7 +91,6 @@ public class Core extends JavaPlugin
 
     private void setup()
     {
-        new RankChecker().setup();
         new CommandManager().setup();
     }
 }

@@ -9,13 +9,13 @@ public enum Rank
     OWNER("Owner", ChatColor.RED),
     ADMIN("Admin", ChatColor.RED),
     VET_DEV("Vet.Dev", ChatColor.GOLD),
+    DEV("Dev", ChatColor.GOLD),
     VET_MOD("Vet.Mod", ChatColor.DARK_PURPLE),
     MOD("Mod", ChatColor.GREEN),
     MENTEE("Mentee", ChatColor.DARK_AQUA),
     BUILDER("Builder", ChatColor.BLUE),
     // Staff ^^
 
-    DEV("Dev", ChatColor.GOLD),
     YOUTUBE("Youtube", ChatColor.RED),
     TWITCH("Twitch", ChatColor.DARK_PURPLE),
     // Special ^^
@@ -26,12 +26,12 @@ public enum Rank
     DEFAULT("", ChatColor.WHITE);
     // Donators ^^
 
+    private String name;
     private ChatColor _colour;
-    public String name;
 
     private HashMap<Rank, Integer> _priority = new HashMap<Rank, Integer>();
 
-    Rank(ChatColor colour, String name)
+    Rank(String name, ChatColor colour)
     {
         _colour = colour;
         this.name = name;
@@ -44,11 +44,11 @@ public enum Rank
         _priority.put(Rank.OWNER, 999);
         _priority.put(Rank.ADMIN, 100);
         _priority.put(Rank.VET_DEV, 100);
+        _priority.put(Rank.DEV, 99);
 
         _priority.put(Rank.VET_MOD, 90);
         _priority.put(Rank.MOD, 80);
         _priority.put(Rank.MENTEE, 70);
-        _priority.put(Rank.DEV, 65);
         _priority.put(Rank.BUILDER, 60);
 
         _priority.put(Rank.YOUTUBE, 50);

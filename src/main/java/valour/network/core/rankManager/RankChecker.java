@@ -17,19 +17,6 @@ public class RankChecker
         Rank.VALIANT, Rank.GALLANT, Rank.BRAVE, Rank.DEFAULT
     };
 
-    public void setup()
-    {
-        try
-        {
-            Statement statement = Core.getInstance().getConnection().createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Ranks(UUID varchar(36), rank varchar(7));");
-        }
-        catch (SQLException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
     protected static Rank getRank(Player player)
     {
         try
