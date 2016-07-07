@@ -9,13 +9,13 @@ public enum Rank
     OWNER("Owner", ChatColor.RED),
     ADMIN("Admin", ChatColor.RED),
     VET_DEV("Vet.Dev", ChatColor.GOLD),
-    DEV("Dev", ChatColor.GOLD),
     VET_MOD("Vet.Mod", ChatColor.DARK_PURPLE),
     MOD("Mod", ChatColor.GREEN),
     MENTEE("Mentee", ChatColor.DARK_AQUA),
     BUILDER("Builder", ChatColor.BLUE),
     // Staff ^^
 
+    DEV("Dev", ChatColor.GOLD),
     YOUTUBE("Youtube", ChatColor.RED),
     TWITCH("Twitch", ChatColor.DARK_PURPLE),
     // Special ^^
