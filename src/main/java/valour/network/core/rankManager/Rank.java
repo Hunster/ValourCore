@@ -45,10 +45,10 @@ public enum Rank
         _priority.put(Rank.ADMIN, 100);
         _priority.put(Rank.VET_DEV, 100);
 
-        _priority.put(Rank.DEV, 99);
         _priority.put(Rank.VET_MOD, 90);
         _priority.put(Rank.MOD, 80);
         _priority.put(Rank.MENTEE, 70);
+        _priority.put(Rank.DEV, 65);
         _priority.put(Rank.BUILDER, 60);
 
         _priority.put(Rank.YOUTUBE, 50);
