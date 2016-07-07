@@ -42,23 +42,30 @@ public class RankAssigner extends MiniPlugin
         }
     }
 
-    protected void updateRank(UUID playerID, Rank rank, boolean inform)
+    protected void updateRank(final UUID playerID, final Rank rank, final boolean inform)
     {
-        try
+        Bukkit.getScheduler().runTaskAsynchronously(Core.getInstance(), new Runnable()
         {
-            Statement statement = Core.getInstance().getConnection().createStatement();
-            statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID + "', DEFAULT);");
-
-            if (inform && Bukkit.getPlayer(playerID) != null)
+            public void run()
             {
-                Player p = Bukkit.getPlayer(playerID);
-                p.sendMessage(Chat.main(getName(), "Your rank has been updated to §9" + rank.getTag(true, false)));
-                p.sendMessage(Chat.main(getName(), "You may need to relog for changes to take effect!"));
+                try
+                {
+                    Statement statement = Core.getInstance().getConnection().createStatement();
+                    statement.executeUpdate("DELETE FROM Ranks WHERE UUID = '" + playerID + "';");
+                    statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID + "', DEFAULT);");
+
+                    if (inform && Bukkit.getPlayer(playerID) != null)
+                    {
+                        Player p = Bukkit.getPlayer(playerID);
+                        p.sendMessage(Chat.main(getName(), "Your rank has been updated to §9" + rank.getTag(true, false)));
+                        p.sendMessage(Chat.main(getName(), "You may need to relog for changes to take effect!"));
+                    }
+                }
+                catch (SQLException ex)
+                {
+                    ex.printStackTrace();
+                }
             }
-        }
-        catch (SQLException ex)
-        {
-            ex.printStackTrace();
-        }
+        });
     }
 }
