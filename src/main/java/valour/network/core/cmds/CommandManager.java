@@ -7,6 +7,7 @@ import valour.network.core.Core;
 import valour.network.core.MiniPlugin;
 import valour.network.core.rankManager.Rank;
 import valour.network.core.rankManager.RankChecker;
+import valour.network.core.rankManager.UpdateRankCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,8 +24,7 @@ public class CommandManager extends MiniPlugin
 
     public void setup()
     {
-        // _commands.add(new UpdateRankCommand());
-
+        _commands.add(new UpdateRankCommand());
     }
 
     @EventHandler
