@@ -5,8 +5,8 @@ import org.bukkit.ChatColor;
 public enum Rank
 {
     OWNER("Owner", ChatColor.RED),
-    VET_DEV("Vet.Dev", ChatColor.GOLD),
     ADMIN("Admin", ChatColor.RED),
+    VET_DEV("Vet.Dev", ChatColor.GOLD),
     DEV("Dev", ChatColor.GOLD),
     VET_MOD("Vet.Mod", ChatColor.DARK_PURPLE),
     MOD("Mod", ChatColor.GREEN),
@@ -17,7 +17,6 @@ public enum Rank
     YOUTUBE("Youtube", ChatColor.RED),
     TWITCH("Twitch", ChatColor.DARK_PURPLE),
     // Special ^^
-
 
     VALIANT("Valiant", ChatColor.YELLOW),
     GALLANT("Gallant", ChatColor.YELLOW),
