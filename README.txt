@@ -1,0 +1,3 @@
+ValourCore
+
+Core plugin
