@@ -20,7 +20,7 @@ public class RankChecker
         Rank.VALIANT, Rank.GALLANT, Rank.BRAVE, Rank.DEFAULT
     };
 
-    public static void setup()
+    public void setup()
     {
         try
         {

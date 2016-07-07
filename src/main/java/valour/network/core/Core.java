@@ -2,6 +2,7 @@ package valour.network.core;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import valour.network.core.cmds.CommandManager;
 import valour.network.core.rankManager.RankChecker;
 
 import java.sql.Connection;
@@ -87,6 +88,7 @@ public class Core extends JavaPlugin
 
     private void setup()
     {
-        RankChecker.setup();
+        new RankChecker().setup();
+        new CommandManager().setup();
     }
 }
