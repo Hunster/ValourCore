@@ -1,6 +1,7 @@
 package valour.network.core.rankmanager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import valour.network.core.cmds.CommandInfo;
@@ -28,29 +29,33 @@ public class UpdateRankCommand extends CoreCommand
             if (player.hasPlayedBefore())
             {
                 UUID id = player.getUniqueId();
-                Rank rank = Rank.valueOf(args[1].toUpperCase());
+                Rank rank;
 
-                if (rank == null)
+                try
+                {
+                    rank = Rank.valueOf(args[1].toUpperCase());
+                }
+                catch (Exception ex)
                 {
                     p.sendMessage(Chat.main(_module, "That is not a valid rank"));
+                    p.sendMessage(Chat.main(_module, "Possible values: §9" + allRanks()));
+                    return;
+                }
+
+                if (RankChecker.getRank(p.getUniqueId()).getPriority() <= rank.getPriority())
+                {
+                    p.sendMessage(Chat.main(_module, "Insufficient permissions!"));
                 }
                 else
                 {
-                    if (RankChecker.getRank(p.getUniqueId()).getPriority() <= rank.getPriority())
+                    if (RankChecker.getRank(id).getPriority() >= RankChecker.getRank(p.getUniqueId()).getPriority() && RankChecker.getRank(p.getUniqueId()) != Rank.OWNER)
                     {
-                        p.sendMessage(Chat.main(_module, "You cannot set a player's rank to one above or equal to yours!"));
+                        p.sendMessage(Chat.main(_module, "Insufficient permissions!"));
                     }
                     else
                     {
-                        if (RankChecker.getRank(id).getPriority() >= RankChecker.getRank(p.getUniqueId()).getPriority())
-                        {
-                            p.sendMessage(Chat.main(_module, "You cannot set a player's rank if they are higher or equal to you!"));
-                        }
-                        else
-                        {
-                            new RankAssigner().updateRank(id, rank, true);
-                            p.sendMessage(Chat.main(_module, "You updated §b" + player.getName() + "§7's rank to §b" + rank.getTag(true, false)));
-                        }
+                        new RankAssigner().updateRank(id, rank, true);
+                        p.sendMessage(Chat.main(_module, "You updated §b" + player.getName() + "§7's rank to §b" + rank.getTag(true, false)));
                     }
                 }
             }
@@ -59,5 +64,16 @@ public class UpdateRankCommand extends CoreCommand
                 p.sendMessage(Chat.main(_module, "That player has never joined before"));
             }
         }
+    }
+
+    private String allRanks()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        for (Rank rank : Rank.values())
+        {
+            sb.append(rank.toString() + " ");
+        }
+        return sb.toString().trim();
     }
 }

@@ -16,19 +16,19 @@ public class RankChecker
         try
         {
             Statement statement = Core.getInstance().getConnection().createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM Ranks WHERE UUID = '" + id + "';");
+            ResultSet results = statement.executeQuery("SELECT * FROM Ranks WHERE UUID = '" + id.toString() + "';");
 
             if (results.next())
             {
                 String rank = results.getString("rank");
 
-                for (Rank r : Rank.values())
+                try
                 {
-                    if (r.toString().equalsIgnoreCase(rank))
-                    {
-                        return r;
-                    }
-
+                    Rank r = Rank.valueOf(rank);
+                    return r;
+                }
+                catch (Exception ex)
+                {
                     return null;
                 }
             }
@@ -42,7 +42,6 @@ public class RankChecker
             ex.printStackTrace();
             return null;
         }
-        return null;
     }
 
     public static boolean has(Player player, Rank rank, boolean inform)
