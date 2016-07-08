@@ -5,9 +5,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import valour.network.core.Core;
 import valour.network.core.MiniPlugin;
-import valour.network.core.rankManager.Rank;
-import valour.network.core.rankManager.RankChecker;
-import valour.network.core.rankManager.UpdateRankCommand;
+import valour.network.core.rankmanager.Rank;
+import valour.network.core.rankmanager.RankChecker;
+import valour.network.core.rankmanager.UpdateRankCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,12 +15,12 @@ import java.util.List;
 
 public class CommandManager extends MiniPlugin
 {
-    private List<CoreCommand> _commands = new ArrayList<CoreCommand>();
-
     public CommandManager()
     {
         super("Commands", Core.getInstance());
     }
+
+    private List<CoreCommand> _commands = new ArrayList<CoreCommand>();
 
     public void setup()
     {

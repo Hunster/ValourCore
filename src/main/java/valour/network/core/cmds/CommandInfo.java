@@ -1,6 +1,6 @@
 package valour.network.core.cmds;
 
-import valour.network.core.rankManager.Rank;
+import valour.network.core.rankmanager.Rank;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

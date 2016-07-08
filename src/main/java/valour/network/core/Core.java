@@ -1,7 +1,9 @@
 package valour.network.core;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import valour.network.core.rankManager.ConsoleUpdateRankCommand;
+import valour.network.core.cmds.CommandManager;
+import valour.network.core.rankmanager.ConsoleUpdateRankCommand;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,11 +14,6 @@ public class Core extends JavaPlugin
 {
     private static Core instance;
 
-    public static Core getInstance()
-    {
-        return instance;
-    }
-
     private Connection _connection;
     private String _host, _database, _username, _password;
     private int _port;
@@ -24,6 +21,8 @@ public class Core extends JavaPlugin
     public void onEnable()
     {
         instance = this;
+
+        setup();
 
         saveDefaultConfig();
         reloadConfig();
@@ -54,6 +53,11 @@ public class Core extends JavaPlugin
         }
     }
 
+    public static Core getInstance()
+    {
+        return instance;
+    }
+
     public Connection getConnection()
     {
         return _connection;
@@ -63,6 +67,7 @@ public class Core extends JavaPlugin
     {
         getLogger().severe("UNABLE TO CONENCT TO MYSQL DATABASE");
         getLogger().severe("CORE DISABLED");
+        Bukkit.getPluginManager().disablePlugin(this);
     }
 
     private void openConnection() throws SQLException, ClassNotFoundException
@@ -81,5 +86,10 @@ public class Core extends JavaPlugin
             Class.forName("com.mysql.jdbc.Driver");
             _connection = DriverManager.getConnection("jdbc:mysql://" + this._host + ":" + this._port + "/" + this._database, this._username, this._password);
         }
+    }
+
+    private void setup()
+    {
+        new CommandManager().setup();
     }
 }
