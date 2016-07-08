@@ -59,7 +59,7 @@ public class RankAssigner extends MiniPlugin
                     {
                         Player p = Bukkit.getPlayer(playerID);
 
-                        p.sendMessage(Chat.main(getName(), "Your rank has been updated to §9" + rank.getTag(true, false)));
+                        p.sendMessage(Chat.main(getName(), "Your rank has been updated to " + rank.getTag(true, false)));
                         p.sendMessage(Chat.main(getName(), "You may need to relog for changes to take effect!"));
 
                         if (rank == Rank.DEFAULT)
