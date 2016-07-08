@@ -1,5 +1,6 @@
 package valour.network.core.cmds;
 
+import com.google.common.collect.Lists;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -44,14 +45,11 @@ public class CommandManager extends MiniPlugin
                     Rank needed = info.rank();
                     if (RankChecker.has(e.getPlayer(), needed, true))
                     {
-                        List<String> newArgs = Arrays.asList(e.getMessage().split(" "));
-                        newArgs.remove(0);
+                        ArrayList<String> message = new ArrayList(Arrays.asList(e.getMessage().split(" ")));
+                        message.remove(0);
 
-                        String[] args = new String[newArgs.size()];
-                        args = newArgs.toArray(args);
-
-                        Player p = e.getPlayer();
-                        cmd.onCommand(p, args);
+                        String[] args = message.toArray(new String[message.size()]);
+                        cmd.onCommand(e.getPlayer(), args);
                     }
                 }
             }
