@@ -22,8 +22,13 @@ public class ChatFormat extends MiniPlugin
         String prefix = rank.getTag(false, true);
 
         if (rank != Rank.DEFAULT)
+        {
             prefix = rank.getColour() + "[" + prefix + rank.getColour() + "]";
-
-        e.setFormat(prefix + ChatColor.YELLOW + " %s " + ChatColor.WHITE + "%s");
+            e.setFormat(prefix + ChatColor.YELLOW + " %s " + ChatColor.WHITE + "%s");
+        }
+        else
+        {
+            e.setFormat(ChatColor.YELLOW + "%s " + ChatColor.WHITE + "%s");
+        }
     }
 }

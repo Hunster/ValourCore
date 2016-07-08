@@ -1,6 +1,7 @@
 package valour.network.core.rankmanager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerLoginEvent;
@@ -51,15 +52,20 @@ public class RankAssigner extends MiniPlugin
                 try
                 {
                     Statement statement = Core.getInstance().getConnection().createStatement();
-                    statement.executeUpdate("DELETE FROM Ranks WHERE UUID = '" + playerID + "';");
-                    statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID + "', '" + rank.toString() + "');");
+                    statement.executeUpdate("DELETE FROM Ranks WHERE UUID = '" + playerID.toString() + "';");
+                    statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID.toString() + "', '" + rank.toString() + "');");
 
                     if (inform && Bukkit.getPlayer(playerID) != null)
                     {
                         Player p = Bukkit.getPlayer(playerID);
+
                         p.sendMessage(Chat.main(getName(), "Your rank has been updated to §9" + rank.getTag(true, false)));
                         p.sendMessage(Chat.main(getName(), "You may need to relog for changes to take effect!"));
-                        p.setPlayerListName(RankChecker.getRank(p.getUniqueId()).getTag(true, true) + " §e" + p.getName());
+
+                        if (rank == Rank.DEFAULT)
+                            p.setPlayerListName(ChatColor.YELLOW + p.getName());
+                        else
+                            p.setPlayerListName(rank.getTag(true, true) + ChatColor.YELLOW + " " + p.getName());
                     }
                 }
                 catch (SQLException ex)

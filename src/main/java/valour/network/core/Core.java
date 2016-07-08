@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import valour.network.core.cmds.CommandManager;
 import valour.network.core.rankmanager.ConsoleUpdateRankCommand;
+import valour.network.core.rankmanager.Rank;
 import valour.network.core.rankmanager.RankAssigner;
 import valour.network.core.util.ChatFormat;
 
