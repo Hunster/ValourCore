@@ -9,21 +9,22 @@ public enum Rank
     ADMIN("Admin", ChatColor.RED, 100),
     VET_DEV("Vet.Dev", ChatColor.GOLD, 100),
     DEV("Dev", ChatColor.GOLD, 99),
-    VET_MOD("Vet.Mod", ChatColor.DARK_PURPLE, 90),
+    VET_MOD("Vet.Mod", ChatColor.DARK_GREEN, 90),
     MOD("Mod", ChatColor.GREEN, 80),
     MENTEE("Mentee", ChatColor.DARK_AQUA, 70),
-    VET_BUILDER("Vet.Builder", ChatColor.BLACK, 61),
-    BUILDER("Builder", ChatColor.BLUE, 60),
+    VET_BUILDER("Vet.Builder", ChatColor.AQUA, 61),
+    BUILDER("Builder", ChatColor.AQUA, 60),
     // Staff ^^
 
-    YOUTUBE("YouTube", ChatColor.RED, 50),
+    YOUTUBE("YouTube", ChatColor.DARK_RED, 50),
     TWITCH("Twitch", ChatColor.DARK_PURPLE, 50),
+    YT("YT", ChatColor.RED, 50),
     GFX("GFX", ChatColor.DARK_BLUE, 49),
     // Special ^^
 
-    VALIANT("Valiant", ChatColor.YELLOW, 40),
-    GALLANT("Gallant", ChatColor.YELLOW, 30),
-    BRAVE("Brave", ChatColor.YELLOW, 20),
+    VALIANT("Valiant", ChatColor.RED, 40),
+    GALLANT("Gallant", ChatColor.AQUA, 30),
+    BRAVE("Brave", ChatColor.GREEN, 20),
     DEFAULT("", ChatColor.WHITE, 10);
     // Donators ^^
 
@@ -33,8 +34,8 @@ public enum Rank
 
     Rank(String name, ChatColor colour, int priority)
     {
-        _colour = colour;
         this.name = name;
+        _colour = colour;
         _priority = priority;
     }
 

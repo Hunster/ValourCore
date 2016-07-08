@@ -28,7 +28,7 @@ public class UpdateRankCommand extends CoreCommand
             if (player.hasPlayedBefore())
             {
                 UUID id = player.getUniqueId();
-                Rank rank = Rank.valueOf(args[1]);
+                Rank rank = Rank.valueOf(args[1].toUpperCase());
 
                 if (rank == null)
                 {

@@ -21,7 +21,7 @@ public class ConsoleUpdateRankCommand implements CommandExecutor
             else
             {
                 UUID id = UUID.fromString(args[0]);
-                Rank rank = Rank.valueOf(args[1]);
+                Rank rank = Rank.valueOf(args[1].toUpperCase());
 
                 new RankAssigner().updateRank(id, rank, true);
             }

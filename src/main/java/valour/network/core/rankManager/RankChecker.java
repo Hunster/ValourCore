@@ -16,7 +16,7 @@ public class RankChecker
         try
         {
             Statement statement = Core.getInstance().getConnection().createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM Ranks (UUID, rank) WHERE UUID = '" + id + "';");
+            ResultSet results = statement.executeQuery("SELECT * FROM Ranks WHERE UUID = '" + id + "';");
 
             if (results.next())
             {

@@ -39,7 +39,7 @@ public class Core extends JavaPlugin
         {
             openConnection();
             Statement statement = _connection.createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Ranks(UUID varchar(36), rank varchar(7));");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Ranks(UUID varchar(36), rank varchar(11));");
         }
         catch (ClassNotFoundException e)
         {
