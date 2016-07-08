@@ -1,4 +1,4 @@
-package valour.network.core.rankManager;
+package valour.network.core.rankmanager;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

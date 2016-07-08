@@ -1,4 +1,4 @@
-package valour.network.core.rankManager;
+package valour.network.core.rankmanager;
 
 import org.bukkit.entity.Player;
 import valour.network.core.Core;
@@ -7,28 +7,22 @@ import valour.network.core.util.Chat;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 
 public class RankChecker
 {
-    private static Rank[] _values = {
-        Rank.OWNER, Rank.VET_DEV, Rank.ADMIN,
-        Rank.DEV, Rank.VET_MOD, Rank.MOD, Rank.MENTEE, Rank.BUILDER,
-        Rank.YOUTUBE, Rank.TWITCH,
-        Rank.VALIANT, Rank.GALLANT, Rank.BRAVE, Rank.DEFAULT
-    };
-
-    protected static Rank getRank(Player player)
+    public static Rank getRank(UUID id)
     {
         try
         {
             Statement statement = Core.getInstance().getConnection().createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM Ranks (UUID, rank) WHERE UUID = '" + player.getUniqueId() + "';");
+            ResultSet results = statement.executeQuery("SELECT * FROM Ranks (UUID, rank) WHERE UUID = '" + id + "';");
 
             if (results.next())
             {
                 String rank = results.getString("rank");
 
-                for (Rank r : _values)
+                for (Rank r : Rank.values())
                 {
                     if (r.toString().equalsIgnoreCase(rank))
                     {
@@ -53,7 +47,7 @@ public class RankChecker
 
     public static boolean has(Player player, Rank rank, boolean inform)
     {
-        Rank curRank = getRank(player);
+        Rank curRank = getRank(player.getUniqueId());
         int curPriority = curRank.getPriority();
 
         if (curPriority < rank.getPriority())

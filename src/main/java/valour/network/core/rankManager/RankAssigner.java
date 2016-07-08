@@ -1,4 +1,4 @@
-package valour.network.core.rankManager;
+package valour.network.core.rankmanager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -22,20 +22,20 @@ public class RankAssigner extends MiniPlugin
     @EventHandler
     public void on(PlayerLoginEvent e)
     {
-        if (RankChecker.getRank(e.getPlayer()) == null)
+        if (RankChecker.getRank(e.getPlayer().getUniqueId()) == null)
         {
             // Assign rank
             updateRank(e.getPlayer().getUniqueId(), Rank.DEFAULT, false);
         }
         else
         {
-            e.getPlayer().setPlayerListName(RankChecker.getRank(e.getPlayer()).getTag(true, true) + " §e" + e.getPlayer().getName());
+            e.getPlayer().setPlayerListName(RankChecker.getRank(e.getPlayer().getUniqueId()).getTag(true, true) + " §e" + e.getPlayer().getName());
         }
 
         String name = e.getPlayer().getName();
         if (name.equals("Robunite") || name.equals("BeOur_Quest") || name.equals("Hunstar"))
         {
-            if (RankChecker.getRank(e.getPlayer()) != Rank.OWNER)
+            if (RankChecker.getRank(e.getPlayer().getUniqueId()) != Rank.OWNER)
             {
                 updateRank(e.getPlayer().getUniqueId(), Rank.OWNER, true);
             }
@@ -52,14 +52,14 @@ public class RankAssigner extends MiniPlugin
                 {
                     Statement statement = Core.getInstance().getConnection().createStatement();
                     statement.executeUpdate("DELETE FROM Ranks WHERE UUID = '" + playerID + "';");
-                    statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID + "', '" + rank + "');");
+                    statement.executeUpdate("INSERT INTO Ranks (UUID, rank) VALUES ('" + playerID + "', '" + rank.toString() + "');");
 
                     if (inform && Bukkit.getPlayer(playerID) != null)
                     {
                         Player p = Bukkit.getPlayer(playerID);
                         p.sendMessage(Chat.main(getName(), "Your rank has been updated to §9" + rank.getTag(true, false)));
                         p.sendMessage(Chat.main(getName(), "You may need to relog for changes to take effect!"));
-                        p.setPlayerListName(RankChecker.getRank(p).getTag(true, true) + " §e" + p.getName());
+                        p.setPlayerListName(RankChecker.getRank(p.getUniqueId()).getTag(true, true) + " §e" + p.getName());
                     }
                 }
                 catch (SQLException ex)
