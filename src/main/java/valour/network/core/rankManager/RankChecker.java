@@ -53,7 +53,7 @@ public class RankChecker
         {
             // No permission
             if (inform)
-                player.sendMessage(Chat.main("Rank", "This feature requires rank" + rank.getTag(true, false)));
+                player.sendMessage(Chat.main("Rank", "This feature requires rank " + rank.getTag(true, false)));
 
             return false;
         }
