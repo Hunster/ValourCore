@@ -16,7 +16,7 @@ public class ConsoleUpdateRankCommand implements CommandExecutor
         {
             if (sender instanceof Player)
             {
-                sender.sendMessage(Chat.main("Commands", "Only the console may execute this command"));
+                sender.sendMessage(Chat.main("Rank", "Only the console may execute this command!"));
             }
             else
             {
