@@ -36,7 +36,7 @@ public enum Rank
 
     public String getTag(boolean uppercase, boolean bold)
     {
-        if (name.equalsIgnoreCase("ALL"))
+        if (name.equalsIgnoreCase(""))
             return "";
 
         String tag = name;
