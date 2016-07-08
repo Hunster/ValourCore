@@ -13,7 +13,7 @@ import java.util.UUID;
 @CommandInfo(rank = Rank.ADMIN, aliases = {"updaterank", "setrank", "addrank"})
 public class UpdateRankCommand extends CoreCommand
 {
-    private String _module = "Ranks";
+    private String _module = "Rank";
 
     @Override
     public void onCommand(Player p, String[] args)
@@ -37,31 +37,31 @@ public class UpdateRankCommand extends CoreCommand
                 }
                 catch (Exception ex)
                 {
-                    p.sendMessage(Chat.main(_module, "That is not a valid rank"));
-                    p.sendMessage(Chat.main(_module, "Possible values: §9" + allRanks()));
+                    p.sendMessage(Chat.main(_module, "The specified rank does not exist!"));
+                    p.sendMessage(Chat.main(_module, "Registered Ranks: " + allRanks()));
                     return;
                 }
 
                 if (RankChecker.getRank(p.getUniqueId()).getPriority() <= rank.getPriority())
                 {
-                    p.sendMessage(Chat.main(_module, "Insufficient permissions!"));
+                    p.sendMessage(Chat.main(_module, "You cannot set your rank to one higher than your current one!"));
                 }
                 else
                 {
                     if (RankChecker.getRank(id).getPriority() >= RankChecker.getRank(p.getUniqueId()).getPriority() && RankChecker.getRank(p.getUniqueId()) != Rank.OWNER)
                     {
-                        p.sendMessage(Chat.main(_module, "Insufficient permissions!"));
+                        p.sendMessage(Chat.main(_module, "You cannot set another player's rank if they are higher in the hierarchy!"));
                     }
                     else
                     {
                         new RankAssigner().updateRank(id, rank, true);
-                        p.sendMessage(Chat.main(_module, "You updated §b" + player.getName() + "§7's rank to §b" + rank.getTag(true, false)));
+                        p.sendMessage(Chat.main(_module, "You updated " + player.getName() + "'s rank to " + rank.getTag(true, false)));
                     }
                 }
             }
             else
             {
-                p.sendMessage(Chat.main(_module, "That player has never joined before"));
+                p.sendMessage(Chat.main(_module, "The specified player has never joined before!"));
             }
         }
     }
